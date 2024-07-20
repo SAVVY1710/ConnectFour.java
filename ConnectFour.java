@@ -1,6 +1,6 @@
 /*
 Sai Avula
-1.29.24
+7.19.24
 ConnectFour
 Make a connect four game
 */
@@ -30,7 +30,6 @@ public class ConnectFour
 
         int [] checkarr  = new int[7];
         int highest = 0;
-        //While loop keeps running until someone looses
         while(highest < 4)
         {
             System.out.print("Player 1, choose a column ");
@@ -115,14 +114,9 @@ public class ConnectFour
                 System.out.println("Red Wins!");
                 break;
             }
-            
+
         }
     }
-
-    /*
-     * @purpose: Method used to check weather red has won
-     * @param: Chars is the array used for which charecters are red or blue
-     */
     public boolean CheckItA(char [][] chars)
     {
         boolean bool = false;
@@ -151,19 +145,88 @@ public class ConnectFour
         }
         return bool;
     }
-    /*
-     * @purpose: Method used to check weather blue has won
-     * @param: Chars is the array used for which charecters are red or blue
-     */
-    public boolean CheckItB(char [][] chars){}
-    /*
-     * @purpose: Method used to check the diagonals to see wheather red has won
-     * @param: Chars is the array used for which charecters are red or blue
-     */
-    public boolean diagonalsA(char [][] chars){}
-    /*
-     * @purpose:Method used to check the diagonals to see wheather red has won
-     * @param: Chars is the array used for which charecters are red or blue
-     */
-    public boolean diagonalsB(char [][] chars){}
+    public boolean CheckItB(char [][] chars)
+    {
+        boolean bool = false;
+        String [] rowcol = new String[13];
+        for (int i = 0; i < 13; i++)rowcol[i] = "";
+        for (int i = 0; i < 6; i++)
+        {
+            for (int n = 0; n < 7; n++)
+            {
+                rowcol[i] += chars[i][n];
+            }
+        }
+        for (int i = 0; i < 7; i++)
+        {
+            for (int n = 0; n < 6; n++)
+            {
+                rowcol[i+6] += chars[n][i];
+            }
+        }
+        for (int i = 0; i < 13; i++)
+        {
+            if(rowcol[i].indexOf("RRRR") >= 0)
+            {
+                bool = true;
+            }
+        }
+        return bool;
+    }
+    public boolean diagonalsA(char [][] chars)
+    {
+        boolean bool = false;
+        String[] diagonals = new String[12];
+        for(int i = 0; i<12; i++)diagonals[i] = "";
+        diagonals[0] = chars[2][0] + "" + chars[3][1] +"" + chars[4][2] + "" + chars[5][3];
+        diagonals[1] = chars[1][0] + "" + chars[2][1] +"" + chars[3][2] + "" + chars[4][3] + chars[5][4];
+        diagonals[2] = chars[0][0] + "" + chars[1][1] +"" + chars[2][2] + "" + chars[3][3] + chars[4][4] + chars[5][5];
+        diagonals[3] = chars[0][1] + "" + chars[1][2] +"" + chars[2][3] + "" + chars[3][4] + chars[4][5] + chars[5][6];
+        diagonals[4] = chars[0][2] + "" + chars[1][3] +"" + chars[2][4] + "" + chars[3][5] + chars[4][6];
+        diagonals[5] = chars[0][3] + "" + chars[1][4] +"" + chars[2][5] + "" + chars[3][6];
+        diagonals[6] = chars[0][3] + "" + chars[1][2] + chars[2][1] + chars[3][0];
+        diagonals[7] = chars[0][4] + "" + chars[1][3] + chars[2][2] + chars[3][1] + chars[4][0];
+        diagonals[8] = chars[0][5] + "" + chars[1][4] + chars[2][3] + chars[3][2] + chars[4][1] + chars[5][0];
+        diagonals[9] = chars[0][6] + "" + chars[1][5] + chars[2][4] + chars[3][3] + chars[4][2] + chars[5][1];
+        diagonals[10] = chars[1][6] + "" + chars[2][5] + chars[3][4] + chars[4][3] + chars[5][2];
+        diagonals[11] = chars[2][6] + "" + chars[3][5] + chars[4][4] + chars[5][3];
+
+        for(int i = 0; i < 12; i++)
+        {
+            if(diagonals[i].indexOf("BBBB") >= 0)
+            {
+                bool = true;
+                i = 100;
+            }
+        }
+        return bool;
+    }
+    public boolean diagonalsB(char [][] chars)
+    {
+        boolean bool = false;
+        String[] diagonals = new String[12];
+        for(int i = 0; i<12; i++)diagonals[i] = "";
+        diagonals[0] = chars[2][0] + "" + chars[3][1] +"" + chars[4][2] + "" + chars[5][3];
+        diagonals[1] = chars[1][0] + "" + chars[2][1] +"" + chars[3][2] + "" + chars[4][3] + chars[5][4];
+        diagonals[2] = chars[0][0] + "" + chars[1][1] +"" + chars[2][2] + "" + chars[3][3] + chars[4][4] + chars[5][5];
+        diagonals[3] = chars[0][1] + "" + chars[1][2] +"" + chars[2][3] + "" + chars[3][4] + chars[4][5] + chars[5][6];
+        diagonals[4] = chars[0][2] + "" + chars[1][3] +"" + chars[2][4] + "" + chars[3][5] + chars[4][6];
+        diagonals[5] = chars[0][3] + "" + chars[1][4] +"" + chars[2][5] + "" + chars[3][6];
+        diagonals[6] = chars[0][3] + "" + chars[1][2] + chars[2][1] + chars[3][0];
+        diagonals[7] = chars[0][4] + "" + chars[1][3] + chars[2][2] + chars[3][1] + chars[4][0];
+        diagonals[8] = chars[0][5] + "" + chars[1][4] + chars[2][3] + chars[3][2] + chars[4][1] + chars[5][0];
+        diagonals[9] = chars[0][6] + "" + chars[1][5] + chars[2][4] + chars[3][3] + chars[4][2] + chars[5][1];
+        diagonals[10] = chars[1][6] + "" + chars[2][5] + chars[3][4] + chars[4][3] + chars[5][2];
+        diagonals[11] = chars[2][6] + "" + chars[3][5] + chars[4][4] + chars[5][3];
+
+        for(int i = 0; i < 12; i++)
+        {
+            if(diagonals[i].indexOf("RRRR") >= 0)
+            {
+                bool = true;
+                i = 100;
+            }
+        }
+        return bool;
+    }
 }
